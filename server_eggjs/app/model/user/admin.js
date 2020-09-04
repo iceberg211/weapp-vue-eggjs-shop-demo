@@ -2,11 +2,12 @@
 
 module.exports = app => {
   const { model, checkUpdate } = app;
+  // 传入模型定义
   const adminSchema = require('../../schema/admin.js')(app);
   const Admin = model.define('admin', adminSchema);
 
   /**
-   * 查找管理员
+   * 查找管理员,传入
    * @param {object} { uuid, attributes } - 条件
    * @return {object|null} - 查找结果
    */
