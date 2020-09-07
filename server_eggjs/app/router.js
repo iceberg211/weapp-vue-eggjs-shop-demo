@@ -51,6 +51,7 @@ module.exports = app => {
 
   router.post('/user/merchant/saveNew', user.merchant.saveNew);
   router.post('/user/merchant/saveModify', user.merchant.saveModify);
+  // 分页查询
   router.post('/user/merchant/query', user.merchant.query);
   router.get('/user/merchant/get', user.merchant.get);
 

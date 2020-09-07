@@ -1,23 +1,69 @@
 'use strict';
 
-const Controller = require('../../core/base_controller');
+const BaseController = require('../../core/base_controller');
 
-/**
- * 学习egg.js的 UserController
- *
+function toInt(str) {
+  if (typeof str === 'number') return str;
+  if (!str) return str;
+  return parseInt(str, 10) || 0;
+}
+
+
+/**  
+ *  mySql Sequelize 增删改查示例
  * @class UserController
- * @extends {Controller}
+ * @extends {BaseController}
  */
-class UserController extends Controller {
+class UserController extends BaseController {
   async index() {
     const ctx = this.ctx;
-    const query = {
-      limit: toInt(ctx.query.limit),
-      offset: toInt(ctx.query.offset)
-    };
+    const query = { limit: toInt(ctx.query.limit), offset: toInt(ctx.query.offset) };
+    // FindAll();
     ctx.body = await ctx.model.User.findAll(query);
   }
-  
+
+  async show() {
+    const ctx = this.ctx;
+    //
+    ctx.body = await ctx.model.User.findByPk(toInt(ctx.params.id));
+  }
+
+  async create() {
+    const ctx = this.ctx;
+    const { name, age } = ctx.request.body;
+    // 新增
+    const user = await ctx.model.User.create({ name, age });
+    ctx.status = 201;
+    ctx.body = user;
+  }
+
+  async update() {
+    const ctx = this.ctx;
+    const id = toInt(ctx.params.id);
+    // 找到一个
+    const user = await ctx.model.User.findByPk(id);
+    if (!user) {
+      ctx.status = 404;
+      return;
+    }
+
+    const { name, age } = ctx.request.body;
+    await user.update({ name, age });
+    ctx.body = user;
+  }
+
+  async destroy() {
+    const ctx = this.ctx;
+    const id = toInt(ctx.params.id);
+    const user = await ctx.model.User.findByPk(id);
+    if (!user) {
+      ctx.status = 404;
+      return;
+    }
+    // destroy
+    await user.destroy();
+    ctx.status = 200;
+  }
 }
 
 module.exports = UserController;

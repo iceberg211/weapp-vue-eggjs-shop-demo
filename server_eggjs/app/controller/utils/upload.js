@@ -7,12 +7,10 @@ const sendToWormhole = require('stream-wormhole');
 
 /**
  * Controller - utils upload
- * @class
- * @author ruiyong-lee
  */
 class UtilsUploadController extends Controller {
   /**
-   * 测试上传
+   * 测试上传 https://eggjs.org/zh-cn/basics/controller.html#%E8%8E%B7%E5%8F%96%E4%B8%8A%E4%BC%A0%E7%9A%84%E6%96%87%E4%BB%B6
    */
   async upload() {
     const { app, ctx } = this;

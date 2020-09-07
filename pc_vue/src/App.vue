@@ -483,7 +483,6 @@
           const { meta = {} } = currentRoute;
           const { tabKey } = meta;
 
-
           this.keepAliveNamesMap[tabKey].forEach((name) => {
             const keepAliveNameIndex = this.keepAliveNames.indexOf(name);
             this.keepAliveNames.splice(keepAliveNameIndex);

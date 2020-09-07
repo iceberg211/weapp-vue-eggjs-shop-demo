@@ -32,7 +32,7 @@ axios.interceptors.request.use(
     loadingInstances.push(loadingInstance);
     return config;
   },
-  error => Promise.error(error),
+  (error) => Promise.error(error),
 );
 
 // 响应拦截器

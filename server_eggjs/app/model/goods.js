@@ -11,7 +11,7 @@ module.exports = app => {
     freezeTableName: true,
   });
 
-  // 关系
+  // 商品分类关系到商品，关联key为categoryUuid
   Goodscategory.hasMany(Goods, { foreignKey: 'categoryUuid' });
 
   /**

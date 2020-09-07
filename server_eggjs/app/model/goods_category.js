@@ -36,6 +36,7 @@ module.exports = app => {
    * @return {string} - 删除类别uuid
    */
   GoodsCategory.remove = async ({ uuid, orgUuid }) => {
+    // 根据uuid和orgUuid来删除
     const result = await GoodsCategory.destroy({ where: { uuid, orgUuid } });
 
     checkDelete(result);

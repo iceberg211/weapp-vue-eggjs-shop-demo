@@ -13,6 +13,7 @@ module.exports = app => {
    */
   Merchant.saveNew = async merchant => {
     await Merchant.create(merchant);
+    // 返回了uuid;
     return merchant.uuid;
   };
 
@@ -35,6 +36,7 @@ module.exports = app => {
       updateField.password = password;
     }
 
+    // 更新
     const result = await Merchant.update(updateField, { where: { uuid, version } });
 
     checkUpdate(result);
@@ -56,6 +58,7 @@ module.exports = app => {
       },
     });
 
+    // 返回的是一个数组
     checkUpdate(result, '旧密码不正确');
 
     return uuid;
@@ -70,9 +73,12 @@ module.exports = app => {
     const { page, pageSize: limit } = pagination;
     const { keywordsLike, status } = filter;
     const order = getSortInfo(sort);
+    // 查询条件
     const condition = {
       offset: (page - 1) * limit,
+      // 分页大小
       limit,
+      // 排序
       order,
       attributes,
       where: {},
@@ -82,6 +88,7 @@ module.exports = app => {
       condition.where.enableStatus = status;
     }
 
+    // 模糊查询
     if (keywordsLike) {
       condition.where[Op.or] = [
         { userName: { [Op.like]: `%%${keywordsLike}%%` } },
@@ -91,9 +98,24 @@ module.exports = app => {
         { servicePhone: { [Op.like]: `%%${keywordsLike}%%` } },
       ];
     }
-
+    // const condition = {
+    //   offset: 0,
+    //   limit: 10,
+    //   order: [['createdTime', 'DESC']],
+    //   attributes: [
+    //     'uuid',
+    //     'version',
+    //     'createdTime',
+    //     'name',
+    //     'enableStatus',
+    //     'userName',
+    //     'servicePhone',
+    //     'linkPhone',
+    //     'linkMan'
+    //   ],
+    //   where: {}
+    // }
     const { count, rows } = await Merchant.findAndCountAll(condition);
-
     return { page, count, rows };
   };
 

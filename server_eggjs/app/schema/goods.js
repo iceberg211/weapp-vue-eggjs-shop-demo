@@ -42,6 +42,7 @@ module.exports = app => {
       type: ENUM('up', 'down'),
       allowNull: false,
     },
+    // 类型ID
     categoryUuid: STRING(38),
     orgUuid: {
       type: STRING(38),

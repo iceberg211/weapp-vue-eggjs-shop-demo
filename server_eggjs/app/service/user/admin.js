@@ -16,6 +16,7 @@ class AdminService extends Service {
    * @return {object|null} - 查找结果
    */
   async getAdminByLogin(userName, password) {
+    // 
     return await this.app.mysql.get('admin', { userName, password: md5(password) });
   }
 

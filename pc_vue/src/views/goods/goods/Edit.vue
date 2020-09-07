@@ -124,7 +124,7 @@
         const res = await this.$api.goods.get(params);
         this.goodsForm = res;
         const images = JSON.parse(res.imagesJsonStr) || [];
-        this.fileList = images.map(item => ({ url: item }));
+        this.fileList = images.map((item) => ({ url: item }));
       },
       async getCategoryDropdownList() {
         this.categoryList = await this.$api.goodsCategory.getDropdownList();

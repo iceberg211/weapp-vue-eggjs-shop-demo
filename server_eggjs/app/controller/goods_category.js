@@ -4,8 +4,6 @@ const Controller = require('../core/base_controller');
 
 /**
  * Controller - 商品类别
- * @class
- * @author ruiyong-lee
  */
 class GoodsCategoryController extends Controller {
   /**
@@ -51,6 +49,7 @@ class GoodsCategoryController extends Controller {
   async remove() {
     const { ctx } = this;
     const { uuid } = ctx.request.body;
+    // 关联了商品
     const goodsCount = await ctx.service.goods.countGoodsByCategory(uuid);
 
     if (goodsCount > 0) {

@@ -31,6 +31,7 @@ class UserCommonController extends Controller {
 
     const { uuid: userUuid, userType, name, orgUuid } = user;
     const result = { name, userUuid, userName, userType, orgUuid };
+    // 写入了token
     ctx.setToken(result);
     this.success(result);
   }
@@ -50,6 +51,7 @@ class UserCommonController extends Controller {
   async savePasswordModify() {
     const { ctx } = this;
     const { userType } = ctx.request.body;
+    // 参数校验
     const rule = {
       userUuid: 'string',
       oldPassword: 'string',

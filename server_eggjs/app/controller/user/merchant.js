@@ -3,7 +3,7 @@
 const Controller = require('../../core/base_controller');
 
 /**
- * Controller - user merchant
+ * Controller - 商家
  * @class
  * @author ruiyong-lee
  */

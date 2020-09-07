@@ -1,5 +1,6 @@
 'use strict';
 
+// 商品类别
 module.exports = app => {
   const { STRING, BIGINT, DATE, UUIDV1 } = app.Sequelize;
 
@@ -10,10 +11,12 @@ module.exports = app => {
       primaryKey: true,
       defaultValue: UUIDV1,
     },
+    // 最后修改时间
     lastModifiedTime: {
       type: DATE,
       allowNull: false,
     },
+    // 最后修改人
     lastModifierName: {
       type: STRING(76),
       allowNull: false,

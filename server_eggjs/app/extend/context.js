@@ -10,7 +10,7 @@ module.exports = {
   getAccessToken() {
     return this.cookies.get('token', { signed: false });
   },
-  // 设置token
+  // 设置token,扩展了context，设置了token
   setToken(data = {}) {
     const { app } = this;
     let { name, userUuid, userName, userType, orgUuid } = data;
@@ -21,8 +21,14 @@ module.exports = {
     }
 
     const token = app.jwt.sign(data, app.config.jwt.secret, { expiresIn: '12h' });
-    const cookieConfig = { maxAge: 1000 * 3600 * 24 * 7, httpOnly: false, overwrite: true, signed: false };
+    const cookieConfig = {
+      maxAge: 1000 * 3600 * 24 * 7,
+      httpOnly: false,
+      overwrite: true,
+      signed: false,
+    };
 
+    // 写入cookies
     this.cookies.set('token', token, { ...cookieConfig, httpOnly: true });
     this.cookies.set('name', name, cookieConfig);
     this.cookies.set('userUuid', userUuid, cookieConfig);
@@ -42,10 +48,14 @@ module.exports = {
     const userType = this.cookies.get('userType', { signed: false });
     const orgUuid = this.cookies.get('orgUuid', { signed: false });
     const token = this.getAccessToken(this);
+    // 通过插件校验jwt
+    //  https://github.com/auth0/node-jsonwebtoken
     const verifyResult = await new Promise(resolve => {
+      // 对比token和secretkeym来验证
       app.jwt.verify(token, app.config.jwt.secret, (err, decoded) => {
         if (err) {
           if (err.name === 'TokenExpiredError' && userUuid) {
+            // token过期处理
             this.setToken({ name, userUuid, userName, userType, orgUuid }); // 刷新token
             resolve({ verify: true, message: { userUuid } });
           } else {
