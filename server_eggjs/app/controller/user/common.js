@@ -25,6 +25,7 @@ class UserCommonController extends Controller {
       user = await ctx.service.user.merchant.getMerchantByLogin(userName, password);
     }
 
+    // 如果为空
     if (app._.isEmpty(user)) {
       return this.fail(ctx.ERROR_CODE, '账号或密码错误');
     }

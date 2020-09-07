@@ -23,7 +23,9 @@ module.exports = app => {
    */
   DeliveryTimeType.saveModify = async deliveryTimeType => {
     const { uuid, name, version, orgUuid, lastModifierId, lastModifierName } = deliveryTimeType;
-    const result = await DeliveryTimeType.update({ version, name, lastModifierId, lastModifierName }, { where: { uuid, orgUuid, version } });
+    const result = await DeliveryTimeType.update(
+      { version, name, lastModifierId, lastModifierName },
+      { where: { uuid, orgUuid, version } });
 
     checkUpdate(result);
 

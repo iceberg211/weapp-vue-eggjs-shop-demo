@@ -24,7 +24,7 @@ class GoodsService extends Service {
   }
 
   /**
-   * 修改商品
+   * 修改商品 都是调用saveModify方法，进行更新
    * @param {object} params - 条件
    * @return {string|null} - 商品uuid
    */

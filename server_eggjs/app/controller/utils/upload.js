@@ -35,7 +35,7 @@ class UtilsUploadController extends Controller {
         // 文件处理，本地环境上传到本地磁盘，生产环境上传到云存储
         try {
           if (app.config.env === 'production') {
-            // result = await ctx.oss.put('egg-multipart-test/' + part.filename, part);
+            result = await ctx.oss.put('egg-multipart-test/' + part.filename, part);
           } else {
             const fileName = `local-upload-image-${ctx.helper.uuidv1()}.${part.mime.split('/')[1]}`;
             // 创建可写流

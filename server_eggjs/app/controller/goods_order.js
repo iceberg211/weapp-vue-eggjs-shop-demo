@@ -4,8 +4,6 @@ const Controller = require('../core/base_controller');
 
 /**
  * Controller - 订货单
- * @class
- * @author ruiyong-lee
  */
 class GoodsOrderController extends Controller {
   /**

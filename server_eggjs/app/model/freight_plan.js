@@ -22,7 +22,8 @@ module.exports = app => {
    * @return {string} - 运费方案uuid
    */
   FreightPlan.saveModify = async freightPlan => {
-    const { uuid, name, version, basicFreight, freeFreightAmount, sysDefault, orgUuid, lastModifierId, lastModifierName } = freightPlan;
+    const { uuid, name, version, basicFreight, freeFreightAmount,
+      sysDefault, orgUuid, lastModifierId, lastModifierName } = freightPlan;
     const result = await FreightPlan.update({
       version, name, basicFreight, freeFreightAmount, sysDefault, lastModifierId, lastModifierName,
     }, {

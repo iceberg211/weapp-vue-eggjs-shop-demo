@@ -7,7 +7,7 @@ export default {
   NICK_NAME: 'nickName',
   AVATAR_URL: 'avatarUrl',
   SESSION: '3rd_session',
-  MERCHANT_UUID: '9ff57530-6afb-11e9-96c7-852592cbf8e8', // 根据不同商家手动配置
+  MERCHANT_UUID: 'd1c33bb0-e5ac-11ea-afd1-97b2aa14508b', // 根据不同商家手动配置
 
   // 搜索
   HISTORY_KEYWORDS: 'history_keywords',
